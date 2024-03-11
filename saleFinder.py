@@ -2,6 +2,9 @@ from urllib.request import urlopen
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import mysql.connector
+import pymysql
+
 
 #checking if can access url
 response = requests.get('https://www.pingpongdepot.com/?gad_source=1&gclid=CjwKCAiA_tuuBhAUEiwAvxkgTkf2PZQDyfDrrlzGQ8zI_Tjk8X3rj3RlxXC01hu54yzszwwqUcdw-xoCLpoQAvD_BwE')
@@ -38,3 +41,33 @@ print('DataFrame is written to CSV File successfully.')
 file_name = 'Table_Tennis_Sales.xlsx'
 sorted.to_excel(file_name)
 print('DataFrame is written to Excel File successfully.')
+
+# Store credantials in file my.propertiesans use Config parser to read from it
+import configparser
+config = configparser.RawConfigParser()
+config.read(filenames = 'my.properties')
+print(config.sections())
+
+h = config.get('mysql','localhost')
+u = config.get('mysql','root')
+p = config.get('mysql','password')
+db = config.get('mysql','db')
+
+
+# Open database connection
+
+scrap_db = pymysql.connect(h,u,p,db)
+
+# prepare a cursor object using cursor() method
+cursor = scrap_db.cursor()
+
+# Drop table if it already exist using execute() method.
+cursor.execute("DROP TABLE IF EXISTS Sale_Finder")
+
+# Create table as per requirement
+sql = """CREATE Sale_Finder (
+ Price FLOAT(20),
+ SaleName TEXT(100),
+ )"""
+
+cursor.execute(sql)
