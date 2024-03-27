@@ -1,1 +1,1 @@
-Webscraper that searches table tennis websites for sales
+Webscraper that searches table tennis websites for trending rubbers
