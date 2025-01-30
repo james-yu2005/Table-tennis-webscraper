@@ -16,4 +16,4 @@ This project is a **web scraper** that searches various table tennis websites to
 ### Built With:
 - **Python**: For web scraping and data processing.
 - **BeautifulSoup**: For parsing HTML and extracting data.
-- **Pandas**: For organizing and exporting the collected data.
+- **Pandas**: For organizing and exporting data.
